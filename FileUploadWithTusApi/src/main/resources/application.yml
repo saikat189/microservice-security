@@ -1,0 +1,12 @@
+server:
+  port: 8082
+spring:  
+  application:
+    name: greeting-service1
+  servlet:
+    multipart:
+      max-file-size: 50KB
+      max-request-size: 50KB
+app:
+  tus-upload-directory: /tmp/upload/tus
+  app-upload-directory: /tmp/upload/app
