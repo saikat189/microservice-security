@@ -5,6 +5,7 @@ import io.tus.java.client.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 
 public class JavaTusClient {
@@ -23,13 +24,16 @@ public class JavaTusClient {
             protected void makeAttempt() throws ProtocolException, IOException {
                 TusUploader tusUploader = tusClient.resumeOrCreateUpload(tusUpload);
                 tusUploader.setChunkSize(1024);
-
+                int actualProgress = 0;
                 do {
                     long totalBytes = tusUpload.getSize();
-                    long bytesUploaded = tusUploader.getOffset();
-                    double progress = (double) (bytesUploaded / totalBytes) * 100;
-
-                    System.out.println("Upload at "+progress+"%");
+                    double bytesUploaded = 0;
+                    bytesUploaded += tusUploader.getOffset();
+                    BigDecimal progress = new BigDecimal((bytesUploaded / (double)totalBytes) * 100);
+                    if(progress.intValue()>actualProgress) {
+                        actualProgress = progress.intValue();
+                        System.out.println("Upload at " + actualProgress + "%");
+                    }
                 }
                 while (tusUploader.uploadChunk() > -1);
 

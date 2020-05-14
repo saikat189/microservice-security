@@ -34,11 +34,10 @@ public class UploadController {
     private Path tusUploadDirectory;
 
 
-    @RequestMapping(value = { "/upload", "/upload/**" }, method = { RequestMethod.POST,
-            RequestMethod.PATCH, RequestMethod.HEAD, RequestMethod.DELETE, RequestMethod.GET })
+    @RequestMapping(value = { "/upload", "/upload/**" }, method = { RequestMethod.POST,RequestMethod.GET })
     public void upload(HttpServletRequest request, HttpServletResponse response)throws IOException{
 
-        this.uploadDirectory = Paths.get(uploadDirectoryName);
+        uploadDirectory = Paths.get(uploadDirectoryName);
         try {
             Files.createDirectories(this.uploadDirectory);
         }

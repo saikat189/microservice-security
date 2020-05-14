@@ -1,7 +1,7 @@
 The POC is for resumeable file upload.
 
 Using TUS api we can break a file in the client end itself using Tus client and 
-upload it with multiple chunks using multiple http request.
+upload it with multiple chunks.
 
 I am using JAVA tus client, but javascript,react.js client also available for web development.
 
