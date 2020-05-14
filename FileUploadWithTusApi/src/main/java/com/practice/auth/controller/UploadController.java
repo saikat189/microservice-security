@@ -34,7 +34,8 @@ public class UploadController {
     private Path tusUploadDirectory;
 
 
-    @RequestMapping(value = { "/upload", "/upload/**" }, method = { RequestMethod.POST,RequestMethod.GET })
+    @RequestMapping(value = { "/upload", "/upload/**" }, method = { RequestMethod.POST,
+            RequestMethod.PATCH, RequestMethod.HEAD, RequestMethod.DELETE, RequestMethod.GET })
     public void upload(HttpServletRequest request, HttpServletResponse response)throws IOException{
 
         uploadDirectory = Paths.get(uploadDirectoryName);
@@ -44,7 +45,7 @@ public class UploadController {
         catch (IOException e) {
             e.printStackTrace();
         }
-        this.tusUploadDirectory = Paths.get(tusUploadDirectoryName);
+        tusUploadDirectory = Paths.get(tusUploadDirectoryName);
         
         tusFileUploadService.process(request,response);
         String uploadURI = request.getRequestURI();
@@ -65,7 +66,7 @@ public class UploadController {
             }
 
             try {
-                this.tusFileUploadService.deleteUpload(uploadURI);
+                tusFileUploadService.deleteUpload(uploadURI);
             }
             catch (IOException | TusException e) {
                 e.printStackTrace();

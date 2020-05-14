@@ -23,7 +23,7 @@ public class JavaTusClient {
             @Override
             protected void makeAttempt() throws ProtocolException, IOException {
                 TusUploader tusUploader = tusClient.resumeOrCreateUpload(tusUpload);
-                tusUploader.setChunkSize(1024);
+                tusUploader.setChunkSize(1024000);
                 int actualProgress = 0;
                 do {
                     long totalBytes = tusUpload.getSize();
